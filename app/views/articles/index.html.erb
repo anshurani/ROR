@@ -1,0 +1,16 @@
+<%= link_to 'Back', new_user_article_path %>
+<table>
+  <tr>
+    <th align="left">Title</th>
+    <th align="left">Text</th>
+  </tr>
+ 
+ <% @article.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.text %></td>
+      <td><%= link_to 'Edit', edit_user_article_path(:id => article.id) %></td>
+      <td><%= link_to 'Delete', user_article_path(:id => article.id), method: :delete %></td>
+    </tr>
+  <% end %>
+</table>

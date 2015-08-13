@@ -1,0 +1,38 @@
+<% if current_user %>
+  <%= link_to "My Account", new_user_article_path(:user_id => session[:user_id]) %>
+  <h1> List of all the Articles </h1>
+  <table>
+  <tr>
+    <th align="left">Title</th>
+    <th align="left">Text</th>
+  </tr>
+  <% @article.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td ><%= article.text %></td>
+      <% if article.user_id == session[:user_id] %>
+      <td><%= link_to 'Edit', edit_user_article_path(:user_id => session[:user_id], :id => article.id) %></td>
+      <td><%= link_to 'Delete', user_article_path(:user_id => session[:user_id],:id => article.id), method: :delete %></td>
+      <% else %>
+      <% end %>
+    </tr>
+  
+  <% end %>
+</table>
+<% else %>
+  <%= link_to "Login", new_session_path %>
+  <h1> List of all the Articles </h1>
+<table>
+  <tr>
+    <th align="left">Title</th>
+    <th align="left">Text</th>
+  </tr>
+  <% @article.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.text %></td>
+    </tr>
+  
+  <% end %>
+</table>
+<% end %>
